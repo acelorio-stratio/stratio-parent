@@ -31,19 +31,6 @@
         <dollar>$</dollar>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Stratio releases</name>
-            <url>http://sodio.stratio.com/repository/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Stratio snapshots</name>
-            <url>http://sodio.stratio.com/repository/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <organization>
         <name>Stratio</name>
         <url>http://stratio.com</url>
@@ -430,6 +417,47 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>productionRepositories</id>
+            <activation>
+                <property>
+                    <name>!isPR</name>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>releases</id>
+                    <name>Stratio releases</name>
+                    <url>http://sodio.stratio.com/repository/releases/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>snapshots</id>
+                    <name>Stratio snapshots</name>
+                    <url>http://sodio.stratio.com/repository/snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>pullRequestRepositories</id>
+            <activation>
+                <property>
+                    <name>isPR</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>staging</id>
+                    <name>Stratio development</name>
+                    <url>http://sodio.stratio.com/repository/staging/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>snapshots</id>
+                    <name>Stratio snapshots</name>
+                    <url>http://sodio.stratio.com/repository/snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
         </profile>
     </profiles>
 </project>
